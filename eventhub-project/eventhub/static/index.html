@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>EventHub – Discover. Register. Experience.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            --bg: #f5f6fb;
+            --cd: #fff;
+            --tx: #0f172a;
+            --mu: #64748b;
+            --p: #3730a3;
+            --p2: #4338ca;
+            --soft: #e0e7ff;
+            --ln: #e2e8f0;
+            --ok: #16a34a;
+            --wa: #ea580c;
+            --er: #dc2626
+        }
+
+        @media(prefers-color-scheme:dark) {
+            :root:not([data-theme=light]) {
+                --bg: #0b1020;
+                --cd: #141b34;
+                --tx: #e8ebf7;
+                --mu: #94a3b8;
+                --p: #a5b4fc;
+                --p2: #4f46e5;
+                --soft: #252d63;
+                --ln: #263056
+            }
+        }
+
+        :root[data-theme=dark] {
+            --bg: #0b1020;
+            --cd: #141b34;
+            --tx: #e8ebf7;
+            --mu: #94a3b8;
+            --p: #a5b4fc;
+            --p2: #4f46e5;
+            --soft: #252d63;
+            --ln: #263056
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px);
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--tx);
+            line-height: 1.55
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            line-height: 1.15;
+            letter-spacing: -.02em
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 800
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 800
+        }
+
+        h3 {
+            font-size: 1.05rem
+        }
+
+        p {
+            margin: .3rem 0
+        }
+
+        .w {
+            max-width: 1160px;
+            margin: auto;
+            padding: 0 20px
+        }
+
+        .sec {
+            padding: 44px 0
+        }
+
+        .mu {
+            color: var(--mu)
+        }
+
+        .ok {
+            color: var(--ok)
+        }
+
+        .er {
+            color: var(--er)
+        }
+
+        .wa {
+            color: var(--wa)
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+            color: inherit
+        }
+
+        :focus-visible {
+            outline: 3px solid #818cf8;
+            outline-offset: 2px
+        }
+
+        nav {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            z-index: 20;
+            background: var(--cd);
+            border-bottom: 1px solid var(--ln)
+        }
+
+        .nv {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            height: 64px
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--p);
+            text-decoration: none;
+            letter-spacing: .02em
+        }
+
+        .lk {
+            display: flex;
+            gap: 6px;
+            flex: 1
+        }
+
+        .lk a,
+        .lk button.l {
+            color: var(--tx);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: .92rem;
+            background: none;
+            border: 0;
+            cursor: pointer
+        }
+
+        .lk a:hover {
+            background: var(--soft)
+        }
+
+        .rt {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        .bg {
+            display: none;
+            background: none;
+            border: 0;
+            font-size: 1.5rem;
+            cursor: pointer
+        }
+
+        .btn {
+            background: var(--p2);
+            color: #fff;
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .15s;
+            text-decoration: none;
+            display: inline-block
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.12)
+        }
+
+        .btn.o {
+            background: transparent;
+            color: var(--p);
+            border: 1.5px solid var(--ln)
+        }
+
+        .btn.g {
+            background: var(--ok)
+        }
+
+        .btn.r {
+            background: var(--er)
+        }
+
+        .btn.sm {
+            padding: 6px 10px;
+            font-size: .82rem
+        }
+
+        .btn:disabled {
+            opacity: .45;
+            cursor: not-allowed;
+            transform: none
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e1b4b, #3730a3 60%, #4f46e5);
+            color: #fff;
+            padding: 56px 0 64px
+        }
+
+        .hero p {
+            max-width: 560px;
+            opacity: .9;
+            font-size: 1.1rem
+        }
+
+        .hero .row {
+            margin: 22px 0;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 12px
+        }
+
+        .sb {
+            background: var(--cd);
+            color: var(--tx);
+            border-radius: 16px;
+            padding: 14px;
+            display: grid;
+            grid-template-columns: 2fr 1.3fr 1.3fr 1.2fr auto;
+            gap: 10px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .25)
+        }
+
+        input,
+        select,
+        textarea {
+            background: var(--cd);
+            border: 1.5px solid var(--ln);
+            border-radius: 10px;
+            padding: 10px 12px;
+            width: 100%
+        }
+
+        input[type=radio],
+        input[type=checkbox] {
+            width: auto
+        }
+
+        label {
+            font-size: .85rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px
+        }
+
+        label input,
+        label select {
+            margin-top: 4px;
+            font-weight: 400
+        }
+
+        .fe {
+            color: var(--er);
+            font-size: .8rem;
+            font-weight: 400
+        }
+
+        .grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        @media(max-width:960px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .sb {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:700px) {
+
+            .grid,
+            .sb {
+                grid-template-columns: 1fr
+            }
+
+            .lk {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--cd);
+                flex-direction: column;
+                padding: 10px;
+                border-bottom: 1px solid var(--ln)
+            }
+
+            .lk.open {
+                display: flex
+            }
+
+            .bg {
+                display: block
+            }
+
+            .rt .hd {
+                display: none
+            }
+        }
+
+        .card {
+            background: var(--cd);
+            border: 1px solid var(--ln);
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, .05);
+            transition: .2s;
+            overflow: hidden
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(15, 23, 42, .12)
+        }
+
+        .pad {
+            padding: 18px
+        }
+
+        .bn {
+            height: 140px;
+            position: relative;
+            display: grid;
+            place-items: center;
+            overflow: hidden
+        }
+
+        .bn .em {
+            font-size: 3.4rem;
+            transition: .3s
+        }
+
+        .card:hover .em {
+            transform: scale(1.15)
+        }
+
+        .bdg {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            background: rgba(255, 255, 255, .92);
+            color: #312e81;
+            border-radius: 99px;
+            padding: 2px 10px;
+            font-size: .75rem;
+            font-weight: 700
+        }
+
+        .sv {
+            position: absolute;
+            right: 10px;
+            top: 8px;
+            background: rgba(255, 255, 255, .92);
+            color: #be123c;
+            border: 0;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-size: 1rem
+        }
+
+        .cb {
+            padding: 16px;
+            display: grid;
+            gap: 8px
+        }
+
+        .meta {
+            font-size: .86rem;
+            color: var(--mu)
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px
+        }
+
+        .pr {
+            font-size: 1.15rem;
+            color: var(--p)
+        }
+
+        .cats {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 14px
+        }
+
+        @media(max-width:960px) {
+            .cats {
+                grid-template-columns: repeat(3, 1fr)
+            }
+        }
+
+        @media(max-width:500px) {
+            .cats {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        .cat {
+            text-align: center;
+            padding: 18px 8px;
+            cursor: pointer;
+            background: var(--cd);
+            border: 1px solid var(--ln);
+            border-radius: 16px;
+            transition: .2s
+        }
+
+        .cat:hover {
+            border-color: var(--p2);
+            transform: translateY(-3px)
+        }
+
+        .cat b {
+            display: block;
+            font-size: .9rem
+        }
+
+        .cat span {
+            font-size: 2rem
+        }
+
+        .pill {
+            display: inline-block;
+            background: var(--soft);
+            color: var(--p);
+            border-radius: 99px;
+            padding: 2px 10px;
+            font-size: .75rem;
+            font-weight: 700
+        }
+
+        .pill.ok {
+            background: #dcfce7;
+            color: #15803d
+        }
+
+        .pill.wa {
+            background: #ffedd5;
+            color: #c2410c
+        }
+
+        .pill.er {
+            background: #fee2e2;
+            color: #b91c1c
+        }
+
+        .tabs {
+            display: flex;
+            gap: 6px;
+            border-bottom: 1px solid var(--ln);
+            margin: 18px 0;
+            overflow-x: auto
+        }
+
+        .tabs button {
+            background: none;
+            border: 0;
+            border-bottom: 3px solid transparent;
+            padding: 10px 14px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--mu);
+            white-space: nowrap
+        }
+
+        .tabs button.on {
+            color: var(--p);
+            border-color: var(--p2)
+        }
+
+        .steps {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 22px;
+            flex-wrap: wrap
+        }
+
+        .st {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px;
+            border-radius: 10px;
+            background: var(--cd);
+            border: 1px solid var(--ln);
+            font-size: .85rem;
+            color: var(--mu)
+        }
+
+        .st.on {
+            border-color: var(--p2);
+            color: var(--p);
+            font-weight: 700;
+            background: var(--soft)
+        }
+
+        .st.dn {
+            color: var(--ok)
+        }
+
+        .two {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px
+        }
+
+        .f2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 14px
+        }
+
+        @media(max-width:800px) {
+
+            .two,
+            .f2 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .opt {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            border: 1.5px solid var(--ln);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer
+        }
+
+        .opt:has(input:checked) {
+            border-color: var(--p2);
+            background: var(--soft)
+        }
+
+        .dash {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 24px;
+            padding: 28px 0
+        }
+
+        .side {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-self: start;
+            position: sticky;
+            top: 80px
+        }
+
+        .side button {
+            text-align: left;
+            background: none;
+            border: 0;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--mu)
+        }
+
+        .side button.on,
+        .side button:hover {
+            background: var(--soft);
+            color: var(--p)
+        }
+
+        @media(max-width:800px) {
+            .dash {
+                grid-template-columns: 1fr
+            }
+
+            .side {
+                flex-direction: row;
+                overflow-x: auto;
+                position: static
+            }
+
+            .side button {
+                white-space: nowrap
+            }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 14px;
+            margin: 16px 0
+        }
+
+        .stat b {
+            font-size: 1.7rem;
+            display: block;
+            color: var(--p)
+        }
+
+        .tw {
+            overflow-x: auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .88rem
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--ln);
+            white-space: nowrap
+        }
+
+        th {
+            color: var(--mu);
+            font-weight: 600
+        }
+
+        .bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            height: 170px;
+            padding-top: 10px
+        }
+
+        .bars div {
+            flex: 1;
+            background: linear-gradient(var(--p2), #818cf8);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            min-height: 6px;
+            transition: height .6s
+        }
+
+        .bars div i {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-style: normal;
+            font-size: .75rem
+        }
+
+        .hb {
+            display: grid;
+            grid-template-columns: 90px 1fr 40px;
+            gap: 8px;
+            align-items: center;
+            margin: 8px 0;
+            font-size: .85rem
+        }
+
+        .hb u {
+            display: block;
+            height: 10px;
+            background: var(--p2);
+            border-radius: 6px;
+            text-decoration: none
+        }
+
+        .tk {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            max-width: 640px;
+            margin: auto;
+            background: var(--cd);
+            border-radius: 20px;
+            border: 1px solid var(--ln);
+            box-shadow: 0 14px 40px rgba(55, 48, 163, .2);
+            overflow: hidden
+        }
+
+        .tk .l {
+            padding: 24px;
+            border-right: 2px dashed var(--ln);
+            position: relative
+        }
+
+        .tk .r {
+            padding: 20px;
+            text-align: center;
+            background: var(--soft);
+            display: grid;
+            place-items: center
+        }
+
+        .tk svg {
+            width: 140px;
+            height: 140px;
+            border-radius: 8px
+        }
+
+        @media(max-width:600px) {
+            .tk {
+                grid-template-columns: 1fr
+            }
+
+            .tk .l {
+                border-right: 0;
+                border-bottom: 2px dashed var(--ln)
+            }
+        }
+
+        .scan {
+            position: relative;
+            display: inline-block
+        }
+
+        .scan.go:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #22c55e;
+            box-shadow: 0 0 12px #22c55e;
+            animation: sc 1s linear infinite
+        }
+
+        @keyframes sc {
+            0% {
+                top: 0
+            }
+
+            100% {
+                top: 100%
+            }
+        }
+
+        .sk {
+            height: 300px;
+            border-radius: 16px;
+            background: linear-gradient(90deg, var(--ln), var(--soft), var(--ln));
+            background-size: 200% 100%;
+            animation: sh 1.2s infinite
+        }
+
+        @keyframes sh {
+            to {
+                background-position: -200% 0
+            }
+        }
+
+        .fade {
+            animation: fd .3s ease
+        }
+
+        @keyframes fd {
+            from {
+                opacity: 0
+            }
+        }
+
+        .pop {
+            animation: pp .5s cubic-bezier(.3, 1.6, .5, 1)
+        }
+
+        @keyframes pp {
+            from {
+                transform: scale(.3);
+                opacity: 0
+            }
+        }
+
+        .big {
+            font-size: 3.5rem;
+            text-align: center
+        }
+
+        .emp {
+            text-align: center;
+            padding: 40px 20px
+        }
+
+        .emp .big {
+            font-size: 3rem
+        }
+
+        .sticky {
+            display: none
+        }
+
+        @media(max-width:700px) {
+            .sticky {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 15;
+                gap: 10px;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+                background: var(--cd);
+                border-top: 1px solid var(--ln)
+            }
+
+            #ai {
+                bottom: 84px !important
+            }
+        }
+
+        #ai {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 30
+        }
+
+        #ai .fab {
+            box-shadow: 0 8px 24px rgba(55, 48, 163, .4);
+            border-radius: 99px;
+            padding: 12px 18px
+        }
+
+        #cp {
+            display: none;
+            width: min(360px, calc(100vw - 32px));
+            background: var(--cd);
+            border: 1px solid var(--ln);
+            border-radius: 16px;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, .25);
+            margin-bottom: 10px;
+            overflow: hidden
+        }
+
+        #cp.open {
+            display: block
+        }
+
+        #cl {
+            height: 280px;
+            overflow: auto;
+            padding: 12px;
+            font-size: .88rem
+        }
+
+        #cl div {
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            background: var(--soft);
+            max-width: 92%
+        }
+
+        #cl div.u {
+            background: var(--p2);
+            color: #fff;
+            margin-left: auto
+        }
+
+        #toast {
+            position: fixed;
+            left: 50%;
+            top: 80px;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 99px;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s
+        }
+
+        #toast.on {
+            opacity: 1
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 40px 0 20px;
+            margin-top: 40px
+        }
+
+        footer .grid {
+            grid-template-columns: 2fr 1fr 1fr 1fr
+        }
+
+        @media(max-width:700px) {
+            footer .grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        footer a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 3px 0;
+            cursor: pointer
+        }
+
+        footer h3 {
+            color: #fff
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+        }
+
+        @media print {
+
+            nav,
+            footer,
+            #ai,
+            .noprint {
+                display: none !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="nav"></nav>
+    <main id="app"></main>
+    <footer id="ft"></footer>
+    <div id="ai"></div>
+    <div id="toast"></div>
+    <script>
+        const LG = '<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true" style="vertical-align:-5px;margin-right:6px"><path d="M12 1l1.6 3h-3.2zM8.5 5h7l1 3h-9zM6.5 9h11l1 4h-13zM4.5 14h15l1 5h-17zM2 20h20v3H2z"/><rect x="10.5" y="15" width="3" height="4" rx="1.5" fill="#fff"/></svg>', $ = s => document.querySelector(s), T = m => { const t = $('#toast'); t.textContent = m; t.className = 'on'; setTimeout(() => t.className = '', 2200) };
+        const E = [
+            { id: 1, t: 'AI & Data Science Summit 2026', c: 'Technology', tg: ['AI & Data Science', 'Conferences', 'Technology'], l: 'Coimbatore', v: 'Codissia Trade Fair Complex', d: '2026-10-25', tm: '9:00 AM – 5:00 PM', p: 299, s: 342, cap: 500, o: 'Tech Innovations Forum', ty: 'Offline', e: '🤖', g: '#4338ca,#06b6d4', m: 95, ds: 'A full-day summit on applied AI, data engineering and responsible ML with keynotes and a hands-on lab.' },
+            { id: 2, t: 'Generative AI Workshop', c: 'Workshop', tg: ['AI & Data Science', 'Workshops'], l: 'Chennai', v: 'IIT Madras Research Park', d: '2026-10-18', tm: '10:00 AM – 4:00 PM', p: 199, s: 58, cap: 120, o: 'PromptCraft Labs', ty: 'Hybrid', e: '✨', g: '#7c3aed,#ec4899', m: 91, ds: 'Build LLM-powered apps, learn prompt design and ship a working prototype in one day.' },
+            { id: 3, t: 'Tamil Cultural Festival 2026', c: 'Cultural', tg: ['Cultural'], l: 'Madurai', v: 'Thamukkam Grounds', d: '2026-11-08', tm: '4:00 PM – 10:00 PM', p: 0, s: 1200, cap: 2000, o: 'Madurai Arts Council', ty: 'Offline', e: '🎭', g: '#ea580c,#facc15', m: 64, ds: 'Folk music, silambam, literature talks and street food celebrating Tamil heritage.' },
+            { id: 4, t: 'Startup & Entrepreneurship Meetup', c: 'Business', tg: ['Business', 'Networking'], l: 'Chennai', v: 'T-Hub Chennai', d: '2026-10-31', tm: '5:00 PM – 8:00 PM', p: 149, s: 73, cap: 150, o: 'Founders Circle', ty: 'Offline', e: '🚀', g: '#0f766e,#22c55e', m: 70, ds: 'Pitch, network and learn from founders who have raised their first round.' },
+            { id: 5, t: 'National College Hackathon', c: 'Competition', tg: ['Hackathons', 'Competitions', 'College Events'], l: 'Coimbatore', v: 'PSG Tech Campus', d: '2026-11-14', tm: '9:00 AM – 9:00 PM', p: 99, s: 0, cap: 300, o: 'CodeSprint India', ty: 'Offline', e: '⚡', g: '#1d4ed8,#a855f7', m: 87, ds: '12 hours, teams of four, real problem statements from industry mentors.' },
+            { id: 6, t: 'Machine Learning Career Workshop', c: 'Career', tg: ['AI & Data Science', 'Career', 'Workshops'], l: 'Madurai', v: 'Online (Zoom)', d: '2026-10-12', tm: '6:00 PM – 8:00 PM', p: 0, s: 210, cap: 400, o: 'DataPath Mentors', ty: 'Online', e: '🎯', g: '#0369a1,#38bdf8', m: 82, ds: 'Resume reviews, portfolio tips and interview prep for ML and data roles.' }];
+        const CATS = [['💻', 'Technology', 64], ['🤖', 'AI & Data Science', 48], ['🛠️', 'Workshops', 72], ['🎤', 'Conferences', 31], ['⚡', 'Hackathons', 27], ['🏆', 'Competitions', 35], ['💼', 'Business', 29], ['🎯', 'Career', 41], ['🎭', 'Cultural', 22], ['⚽', 'Sports', 18], ['🤝', 'Networking', 33], ['🎓', 'College Events', 56]];
+        const SP = [['Dr. Arun Kumar', 'AI Research Scientist', 'Tech Innovations Pvt Ltd', 'Builds large-scale language systems.'], ['Meera Subramanian', 'Head of Data', 'Zoho Analytics', 'Ten years in production ML.'], ['Karthik Raja', 'Founder', 'Neuron Labs', 'Ex-startup CTO and mentor.']];
+        const SC = [['09:00 AM', 'Registration & Welcome'], ['10:00 AM', 'Opening Ceremony'], ['10:30 AM', 'AI Keynote'], ['12:00 PM', 'Technical Session'], ['01:00 PM', 'Lunch'], ['02:00 PM', 'Hands-on Workshop'], ['04:00 PM', 'Q&A'], ['05:00 PM', 'Closing Ceremony']];
+        const S = { v: 'h', u: null, regs: [{ id: 'EH-26-10482', e: 2, name: 'You', tk: 'Student', total: 137, st: 'Confirmed' }], saved: [1], n: [{ t: 'Your registration for Generative AI Workshop is confirmed.', r: 0 }, { t: 'New event matching your interests: ML Career Workshop.', r: 0 }, { t: 'Your event ticket is ready.', r: 1 }], tb: 'About', ut: 'dash', mt: 'up', ot: 'ov', ct: {} };
+        const OE = [{ n: 'AI & Data Science Summit 2026', d: '25 Oct', r: 158, cap: 500, rev: 47242, st: 'Published' }, { n: 'ML Career Workshop', d: '12 Oct', r: 190, cap: 400, rev: 0, st: 'Published' }, { n: 'Campus Coding Night', d: '02 Dec', r: 0, cap: 200, rev: 0, st: 'Draft' }];
+        const PL = [['Ananya R', 'ananya@psg.edu', 'PSG Tech', 'Student', 'EH-26-10001', 'Paid'], ['Vikram S', 'vikram@nec.edu', 'NEC Kovilpatti', 'General', 'EH-26-10002', 'Paid'], ['Divya M', 'divya@tce.edu', 'TCE Madurai', 'Student', 'EH-26-10003', 'Paid'], ['Rahul K', 'rahul@zoho.com', 'Zoho', 'VIP', 'EH-26-10004', 'Paid'], ['Sana F', 'sana@vit.ac.in', 'VIT', 'General', 'EH-26-10005', 'Pending'], ['Harish P', 'harish@cit.edu', 'CIT', 'Student', 'EH-26-10006', 'Paid']].map(a => ({ n: a[0], em: a[1], col: a[2], tk: a[3], id: a[4], pay: a[5], dt: '03 Oct', ci: null }));
+        const PEND = [{ n: 'Women in Tech Conclave', o: 'Techies Collective', c: 'Conferences', d: '2026-12-05', l: 'Chennai', sub: '05 Oct' }, { n: 'Open Mic Night', o: 'Campus Beats', c: 'Cultural', d: '2026-11-22', l: 'Madurai', sub: '06 Oct' }];
+        const USERS = [['Ananya R', 'ananya@psg.edu', 'Participant', 4, 1], ['Techies Collective', 'hello@techies.in', 'Organizer', 0, 1], ['Vikram S', 'vikram@nec.edu', 'Participant', 2, 1], ['Spam Bot', 'x@spam.xyz', 'Participant', 0, 0]];
+        const ev = id => E.find(e => e.id == id), pr = e => e.p ? '₹' + e.p : 'Free', dt = d => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        const F = { q: '', c: '', l: '', d: '', ty: '', pr: '', sort: 'rec' };
+        const flt = () => E.filter(e => (!F.q || (e.t + e.c + e.o + e.ds).toLowerCase().includes(F.q.toLowerCase())) && (!F.c || e.c == F.c || e.tg.includes(F.c)) && (!F.l || e.l == F.l) && (!F.d || e.d == F.d) && (!F.ty || e.ty == F.ty) && (!F.pr || (F.pr == 'Free' ? !e.p : e.p > 0))).sort({ new: (a, b) => b.id - a.id, pop: (a, b) => (b.cap - b.s) - (a.cap - a.s), date: (a, b) => a.d.localeCompare(b.d), price: (a, b) => a.p - b.p, rec: (a, b) => b.m - a.m }[F.sort]);
+        const card = (e, why) => `<article class="card"><div class="bn" style="background:linear-gradient(135deg,${e.g})"><span class="em">${e.e}</span><span class="bdg">${e.c}</span><button class="sv" aria-label="Save event" onclick="sv(${e.id})">${S.saved.includes(e.id) ? '♥' : '♡'}</button></div><div class="cb"><h3>${e.t}</h3>${why ? `<div><span class="pill">AI Recommended</span> <b class="ok">${e.m}% Match</b></div><p class="meta">Why this event? Matches your interests in AI, Python and Machine Learning.</p>` : `<p class="meta">${e.ds.slice(0, 72)}…</p>`}<p class="meta">📅 ${dt(e.d)} · ${e.tm.split(' – ')[0]}<br>📍 ${e.l}<br>🏢 ${e.o}</p><div class="row"><b class="pr">${pr(e)}</b>${e.s ? `<span class="${e.s < 80 ? 'wa' : 'ok'}">${e.s} seats available</span>` : '<span class="pill er">Event full</span>'}</div><div class="row"><button class="btn o" onclick="go('d',${e.id})">View Details</button><button class="btn" onclick="reg(${e.id})" ${e.s ? '' : 'disabled'}>Register</button></div></div></article>`;
+        const emp = (i, t, m, b) => `<div class="emp card"><div class="big">${i}</div><h3>${t}</h3><p class="mu">${m}</p>${b || ''}</div>`;
+        const fld = (k, l, ty = 'text', o = {}) => `<label>${l}${o.r ? ' *' : ''}<input id="f_${k}" type="${ty}" value="${(o.v || '').replace(/"/g, '&quot;')}" ${o.r ? 'required' : ''}><span class="fe" id="e_${k}"></span></label>`;
+        function qr(s) { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; let r = ''; for (let y = 0; y < 21; y++)for (let x = 0; x < 21; x++) { const fx = x < 8 || x > 12, fy = y < 8 || y > 12; let on; if ((x < 8 || x > 12) && (y < 8 || y > 12) && !(x > 12 && y > 12)) { const a = x < 8 ? x : x - 13, b = y < 8 ? y : y - 13; on = a == 7 || b == 7 ? 0 : (a == 0 || a == 6 || b == 0 || b == 6 || (a > 1 && a < 5 && b > 1 && b < 5)) ? 1 : 0 } else { h = (Math.imul(h, 1103515245) + 12345) >>> 0; on = (h >>> 16) & 1 } if (on) r += `<rect x="${x}" y="${y}" width="1" height="1"/>` } return `<svg viewBox="-1 -1 23 23" role="img" aria-label="QR code ${s}"><rect x="-1" y="-1" width="23" height="23" fill="#fff"/><g fill="#0f172a">${r}</g></svg>` }
+        function go(v, a) { S.v = v; S.a = a; S.mn = 0; draw(); scrollTo(0, 0) }
+        function sc(id) { go('h'); setTimeout(() => $('#' + id)?.scrollIntoView(), 50) }
+        function draw() { $('#nav').innerHTML = NAV(); $('#app').innerHTML = `<div class="fade">${V[S.v]()}</div>`; $('#ft').innerHTML = FT(); if (S.v == 'x') { F.sk = 1; setTimeout(gr, S.skd ? 0 : 450); S.skd = 1 } $('#ai').innerHTML = AI(); }
+        const NAV = () => `<div class="w nv" style="position:relative"><a class="logo" href="#" onclick="go('h');return false">${LG}EVENTHUB</a><div class="lk ${S.mn ? 'open' : ''}"><a href="#" onclick="go('h');return false">Home</a><a href="#" onclick="go('x');return false">Explore Events</a><a href="#" onclick="sc('cats');return false">Categories</a><a href="#" onclick="sc('how');return false">How It Works</a><a href="#" onclick="sc('how');return false">About</a></div><div class="rt"><button class="btn o sm hd" aria-label="Search" onclick="go('x')">🔍</button><button class="btn o sm hd" onclick="S.u&&S.u.role!='Participant'?go(S.u.role=='Admin'?'a':'o'):go('l')">Create Event</button>${S.u ? `<button class="btn o sm" onclick="S.ut='notes';go('u')" aria-label="Notifications">🔔${S.n.filter(n => !n.r).length || ''}</button><button class="btn sm" onclick="dsh()">${S.u.name[0]} ${S.u.name.split(' ')[0]}</button><button class="btn o sm hd" onclick="S.u=null;go('h')">Logout</button>` : `<button class="btn o sm" onclick="go('l')">Login</button><button class="btn sm hd" onclick="go('s')">Sign Up</button>`}<button class="bg" aria-label="Menu" onclick="S.mn=!S.mn;$('#nav').innerHTML=NAV()">☰</button></div></div>`;
+        const FT = () => `<div class="w"><div class="grid"><div><h3>${LG}EVENTHUB</h3><p>Discover experiences. Connect with people.</p></div><div><h3>Platform</h3><a onclick="go('x')">Explore Events</a><a onclick="go('l')">Create Event</a><a onclick="sc('cats')">Categories</a><a onclick="go('x')">AI Recommendations</a></div><div><h3>Company</h3><a>About</a><a>Contact</a><a>Careers</a></div><div><h3>Support</h3><a>Help Center</a><a>FAQs</a><a>Terms</a><a>Privacy Policy</a></div></div><p style="margin-top:24px">Instagram · LinkedIn · YouTube · X</p><p>© 2026 EventHub. All rights reserved.</p></div>`;
+        const dsh = () => go(S.u.role == 'Admin' ? 'a' : S.u.role == 'Organizer' ? 'o' : 'u');
+        function sv(id) { const i = S.saved.indexOf(id); i < 0 ? S.saved.push(id) : S.saved.splice(i, 1); S.v == 'x' ? gr() : draw(); T(i < 0 ? 'Event saved' : 'Removed from saved') }
+        function hs() { F.q = $('#hq').value; F.c = $('#hc').value; F.l = $('#hl').value; F.d = $('#hd').value; go('x') }
+        function gr() { const r = flt(), g = $('#grid'); if (!g) return; g.innerHTML = r.map(e => card(e)).join('') || ''; $('#cnt').textContent = r.length + ' events found'; $('#none').innerHTML = r.length ? '' : emp('🔎', 'No events match', 'Try removing a filter or searching a different keyword.', `<button class="btn" onclick="Object.assign(F,{q:'',c:'',l:'',d:'',ty:'',pr:''});draw()">Clear filters</button>`) }
+        const sel = (k, l, o) => `<select aria-label="${l}" onchange="F.${k}=this.value;gr()"><option value="">${l}</option>${o.map(x => `<option ${F[k] == x ? 'selected' : ''}>${x}</option>`).join('')}</select>`;
+        const V = {
+            h: () => `<section class="hero"><div class="w"><h1>Discover Events. Connect. Experience.</h1><p>Find workshops, conferences, competitions, cultural events and professional experiences happening near you.</p><div class="row"><button class="btn" style="background:#fff;color:#312e81" onclick="go('x')">Explore Events</button><button class="btn o" style="color:#fff;border-color:#a5b4fc" onclick="S.u&&S.u.role!='Participant'?dsh():go('l')">Create an Event</button></div>
+<div class="sb"><input id="hq" placeholder="Search events, workshops, conferences..." aria-label="Event name"><select id="hc" aria-label="Category"><option value="">Category</option>${CATS.map(c => `<option>${c[1]}</option>`).join('')}</select><select id="hl" aria-label="Location"><option value="">Location</option><option>Coimbatore</option><option>Chennai</option><option>Madurai</option></select><input id="hd" type="date" aria-label="Date"><button class="btn" onclick="hs()">Search</button></div></div></section>
+<section class="sec w"><h2>Featured Events</h2><p class="mu">Discover the events everyone is talking about.</p><br><div class="grid">${E.map(e => card(e)).join('')}</div></section>
+<section class="sec w" id="cats"><h2>Browse by category</h2><br><div class="cats">${CATS.map(c => `<button class="cat" onclick="F.c='${c[1]}';go('x')"><span>${c[0]}</span><b>${c[1]}</b><small class="mu">${c[2]} Events</small></button>`).join('')}</div></section>
+<section class="sec w"><div class="row"><div><h2>Upcoming Events Near You</h2><p class="mu">Sorted by date.</p></div><button class="btn o" onclick="go('x')">View All Events</button></div><br><div class="grid">${[...E].sort((a, b) => a.d.localeCompare(b.d)).slice(0, 3).map(e => card(e)).join('')}</div></section>
+<section class="sec w"><h2>Recommended For You</h2><p class="mu">Discover events based on your interests, skills and previous registrations.</p><br><div class="grid">${[...E].sort((a, b) => b.m - a.m).slice(0, 3).map(e => card(e, 1)).join('')}</div></section>
+<section class="sec w" id="how"><h2>How EventHub works</h2><br><div class="grid"><div class="card pad"><h3>1. Find</h3><p class="mu">Search and filter by category, city, date and price.</p></div><div class="card pad"><h3>2. Register</h3><p class="mu">Four quick steps. Pay with UPI, card or net banking.</p></div><div class="card pad"><h3>3. Attend</h3><p class="mu">Show your QR ticket at the entrance. Check-in takes seconds.</p></div></div></section>`,
+            x: () => `<div class="w sec"><h1 style="font-size:2.4rem">Explore Events</h1><p class="mu">Find your next experience.</p><br><input id="xq" value="${F.q}" placeholder="Search events..." aria-label="Search events" oninput="F.q=this.value;gr()"><br><br><div class="f2" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">${sel('c', 'Category', CATS.map(c => c[1]))}${sel('l', 'Location', ['Coimbatore', 'Chennai', 'Madurai'])}${sel('ty', 'Event Type', ['Online', 'Offline', 'Hybrid'])}${sel('pr', 'Price', ['Free', 'Paid'])}<select aria-label="Sort" onchange="F.sort=this.value;gr()"><option value="rec">Recommended</option><option value="new">Newest</option><option value="pop">Most Popular</option><option value="date">Date</option><option value="price">Price: Low to High</option></select></div><p class="mu" id="cnt">Loading…</p><div class="grid" id="grid">${'<div class="sk"></div>'.repeat(3)}</div><div id="none"></div></div>`,
+            d: () => {
+                const e = ev(S.a); return `<div class="w sec"><div class="card"><div class="bn" style="height:220px;background:linear-gradient(135deg,${e.g})"><span class="em" style="font-size:6rem">${e.e}</span><span class="bdg">${e.c}</span></div><div class="pad two"><div><h1 style="font-size:2.2rem">${e.t}</h1><p>${e.ds}</p><p class="meta">Organized by <b>${e.o}</b> · ⭐ 4.7 (212 reviews)</p><p>📅 ${dt(e.d)} · ${e.tm}<br>📍 ${e.v}, ${e.l} · ${e.ty}</p></div><div><h2 class="pr">${pr(e)}</h2>${e.s ? `<p class="${e.s < 80 ? 'wa' : 'ok'}">${e.s} of ${e.cap} seats available</p><button class="btn" style="width:100%" onclick="reg(${e.id})">Register Now</button>` : `<div class="pill er">Registration Closed</div><p class="mu">This event has reached its maximum capacity.</p>`}<br><br><button class="btn o" style="width:100%" onclick="navigator.clipboard?.writeText(location.href);T('Event link copied')">Share Event</button></div></div></div>
+<div class="tabs" role="tablist">${['About', 'Schedule', 'Speakers', 'Venue', 'FAQs'].map(t => `<button role="tab" class="${S.tb == t ? 'on' : ''}" onclick="S.tb='${t}';draw()">${t}</button>`).join('')}</div><div class="card pad">${{ About: `<p>${e.ds} Expect practical sessions, peer networking and certificates of participation. Open to students and professionals.</p>`, Schedule: SC.map(s => `<div class="row" style="justify-content:flex-start;gap:20px;padding:8px 0;border-bottom:1px solid var(--ln)"><b style="width:90px">${s[0]}</b>${s[1]}</div>`).join(''), Speakers: `<div class="grid">${SP.map(s => `<div class="card pad"><div class="big" style="text-align:left">👤</div><h3>${s[0]}</h3><p class="meta">${s[1]}, ${s[2]}</p><p>${s[3]}</p></div>`).join('')}</div>`, Venue: `<h3>${e.v}</h3><p>${e.l}, Tamil Nadu</p><div class="sk" style="height:160px;margin:10px 0;animation:none;background:var(--soft);display:grid;place-items:center">🗺️ Map placeholder</div><p class="mu">Nearby: parking, cafeteria, metro/bus stop, Wi-Fi.</p><button class="btn o" onclick="T('Opening directions…')">Get Directions</button>`, FAQs: `<h3>Will I get a certificate?</h3><p class="mu">Yes, all checked-in participants receive one.</p><h3>Can I cancel?</h3><p class="mu">Cancel from your dashboard up to 24 hours before the event.</p>` }[S.tb]}</div></div><div class="sticky"><b class="pr">${pr(e)}</b><button class="btn" onclick="reg(${e.id})" ${e.s ? '' : 'disabled'}>${e.s ? 'Register Now' : 'Registration Closed'}</button></div>`
+            },
+            r: () => { const g = S.rg, e = ev(g.e), x = pc(g); return `<div class="w sec" style="max-width:860px"><h2>${e.t}</h2><br><div class="steps">${['Personal Details', 'Ticket', 'Payment', 'Confirmation'].map((s, i) => `<div class="st ${g.step == i + 1 ? 'on' : ''} ${g.step > i + 1 ? 'dn' : ''}"><b>0${i + 1}</b> ${s}</div>`).join('')}</div>${[() => '', () => `<div class="card pad"><div class="f2">${fld('name', 'Full Name', 'text', { r: 1, v: g.f.name })}${fld('email', 'Email', 'email', { r: 1, v: g.f.email })}${fld('mob', 'Mobile Number', 'tel', { r: 1, v: g.f.mob })}${fld('org', 'College / Organization', 'text', { r: 1, v: g.f.org })}${fld('dep', 'Department', 'text', { v: g.f.dep })}${fld('yr', 'Year of Study', 'text', { v: g.f.yr })}${fld('city', 'City', 'text', { v: g.f.city })}${fld('skills', 'Skills / Interests (optional)', 'text', { v: g.f.skills })}</div><button class="btn" onclick="s1()">Continue</button></div>`, () => `<div class="card pad">${['General', 'Student', 'VIP'].map(k => `<label class="opt"><input type="radio" name="tk" ${g.tk == k ? 'checked' : ''} onchange="S.rg.tk='${k}';draw()"><span style="flex:1"><b>${k} Pass</b></span><b>${tp(e, k) ? '₹' + tp(e, k) : 'Free'}</b></label>`).join('')}${bk(x)}<button class="btn" onclick="S.rg.step=3;draw()">Continue</button></div>`, () => `<div class="two"><div class="card pad"><h3>Secure checkout</h3>${g.fail ? '<p class="pill er">Payment failed. Your bank declined the request. Try another method.</p>' : ''}<br>${x.t ? ['UPI', 'Credit Card', 'Debit Card', 'Net Banking'].map((m, i) => `<label class="opt"><input type="radio" name="pm" ${i ? '' : 'checked'}>${m}</label>`).join('') + `<button class="btn" id="pay" onclick="pay()">Pay & Register</button> <button class="btn o sm" onclick="S.rg.fail=1;draw()">Simulate failure</button>` : `<p>This pass is free. No payment needed.</p><button class="btn" id="pay" onclick="pay()">Confirm Registration</button>`}</div><div class="card pad"><h3>Order Summary</h3><p class="meta">${e.t}<br>${g.tk} Pass × 1<br>${dt(e.d)}<br>${e.v}</p>${bk(x)}</div></div>`, () => { const rg = S.regs.find(r => r.id == g.id); return `<div class="card pad" style="text-align:center"><div class="big pop">✅</div><h2>Registration Successful!</h2><p>You are successfully registered for this event.</p><p class="meta">Registration ID: <b>${rg.id}</b><br>${e.t}<br>${dt(e.d)} · ${e.tm}<br>${e.v}</p><p class="mu">A confirmation has been sent to ${g.f.email}.</p><div class="row" style="justify-content:center;flex-wrap:wrap"><button class="btn" onclick="go('t','${rg.id}')">View Ticket</button><button class="btn o" onclick="go('t','${rg.id}');setTimeout(print,300)">Download Ticket</button><button class="btn o" onclick="T('Added to calendar')">Add to Calendar</button><button class="btn o" onclick="S.u?dsh():go('l')">Back to Dashboard</button></div></div>` }][g.step]()}</div>` },
+            t: () => { const r = S.regs.find(x => x.id == S.a), e = ev(r.e); return `<div class="w sec"><div class="tk"><div class="l"><b class="logo">${LG}EVENTHUB</b><h2 style="margin:12px 0">${e.t}</h2><p><b>${r.name}</b><br><span class="mu">${r.tk} Pass · ${r.id}</span></p><p class="meta">📅 ${dt(e.d)} · ${e.tm}<br>📍 ${e.v}, ${e.l}</p></div><div class="r"><div><div class="scan go">${qr(r.id)}</div><p class="meta">Scan this QR code at the entrance.</p></div></div></div><div class="row noprint" style="justify-content:center;margin-top:20px"><button class="btn" onclick="print()">Download Ticket</button><button class="btn o" onclick="navigator.clipboard?.writeText('${r.id}');T('Ticket ID copied')">Share Ticket</button><button class="btn o" onclick="S.u?dsh():go('h')">Back</button></div></div>` },
+            l: () => au(0), s: () => au(1),
+            u: () => { if (!S.u) return au(0); const U = S.regs.filter(r => r.st == 'Confirmed'), tabs = [['dash', 'Dashboard'], ['my', 'My Events'], ['tix', 'My Tickets'], ['rec', 'Recommendations'], ['notes', 'Notifications'], ['saved', 'Saved Events'], ['prof', 'Profile']], b = S.ut; return `<div class="w dash"><div class="side">${tabs.map(t => `<button class="${b == t[0] ? 'on' : ''}" onclick="S.ut='${t[0]}';draw()">${t[1]}</button>`).join('')}<button onclick="S.u=null;go('h')">Logout</button></div><div>${{ dash: `<h2>Welcome back, ${S.u.name.split(' ')[0]}!</h2><div class="stats">${[['Upcoming Events', U.length], ['Total Registrations', S.regs.length], ['Completed Events', 0], ['Saved Events', S.saved.length]].map(s => `<div class="card pad stat"><b>${s[1]}</b>${s[0]}</div>`).join('')}</div><h3>Upcoming registrations</h3><br>${U.length ? U.map(rw).join('') : emp('📅', 'No upcoming events', 'Find something worth attending.', '<button class="btn" onclick="go(\'x\')">Explore Events</button>')}`, my: `<div class="tabs">${[['up', 'Upcoming'], ['done', 'Completed'], ['can', 'Cancelled']].map(t => `<button class="${S.mt == t[0] ? 'on' : ''}" onclick="S.mt='${t[0]}';draw()">${t[1]}</button>`).join('')}</div>${(l => l.length ? l.map(rw).join('') : emp('🗓️', 'Nothing here yet', 'Registrations will appear in this tab.'))(S.regs.filter(r => ({ up: 'Confirmed', can: 'Cancelled', done: 'Done' })[S.mt] == r.st))}`, tix: `<h2>My Tickets</h2><br>${U.map(rw).join('') || emp('🎟️', 'No tickets', 'Register for an event to get your QR ticket.')}`, rec: `<h2>Recommended For You</h2><br><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr))">${[...E].sort((a, b) => b.m - a.m).slice(0, 3).map(e => card(e, 1)).join('')}</div>`, notes: `<h2>Notifications</h2><br>${S.n.map((n, i) => `<div class="card pad row" style="margin-bottom:10px;${n.r ? 'opacity:.65' : 'border-left:4px solid var(--p2)'}"><span>${n.t}</span><button class="btn o sm" onclick="S.n[${i}].r=!S.n[${i}].r;draw()">${n.r ? 'Mark unread' : 'Mark read'}</button></div>`).join('')}`, saved: `<h2>Saved Events</h2><br>${S.saved.length ? `<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr))">${S.saved.map(i => card(ev(i))).join('')}</div>` : emp('♡', 'No saved events', 'Tap the heart on any event to keep it here.', '<button class="btn" onclick="go(\'x\')">Explore Events</button>')}`, prof: `<h2>Profile</h2><div class="card pad"><p><b>${S.u.name}</b><br>${S.u.email}</p><p class="mu">Interests: AI, Python, Machine Learning</p></div>` }[b]}</div></div>` },
+            o: () => { if (!S.u) return au(0); const c = S.ct, tabs = [['ov', 'Overview'], ['new', 'Create Event'], ['pp', 'Participants'], ['ck', 'Check-in'], ['an', 'Analytics']]; return `<div class="w dash"><div class="side">${tabs.map(t => `<button class="${S.ot == t[0] ? 'on' : ''}" onclick="S.ot='${t[0]}';draw()">${t[1]}</button>`).join('')}</div><div>${{ ov: `<h2>Organizer Overview</h2><div class="stats">${[['Total Events', OE.length], ['Total Registrations', OE.reduce((a, b) => a + b.r, 0)], ['Total Revenue', '₹' + OE.reduce((a, b) => a + b.rev, 0).toLocaleString('en-IN')], ['Upcoming Events', OE.filter(e => e.st == 'Published').length]].map(s => `<div class="card pad stat"><b>${s[1]}</b>${s[0]}</div>`).join('')}</div><div class="card tw"><table><tr><th>Event</th><th>Date</th><th>Registrations</th><th>Capacity</th><th>Revenue</th><th>Status</th><th>Actions</th></tr>${OE.map(e => `<tr><td>${e.n}</td><td>${e.d}</td><td>${e.r}</td><td>${e.cap}</td><td>₹${e.rev.toLocaleString('en-IN')}</td><td><span class="pill ${e.st == 'Published' ? 'ok' : e.st == 'Draft' ? '' : 'wa'}">${e.st}</span></td><td><button class="btn o sm" onclick="S.ot='pp';draw()">Manage</button> <button class="btn o sm" onclick="S.ot='an';draw()">Analytics</button></td></tr>`).join('')}</table></div>`, new: `<h2>Create Event · Step ${c.s || 1} of 4</h2><div class="steps" style="margin-top:12px">${['Basics', 'Date & Location', 'Tickets & Speakers', 'Publish'].map((s, i) => `<div class="st ${(c.s || 1) == i + 1 ? 'on' : ''}">${s}</div>`).join('')}</div><div class="card pad">${[() => '', () => `<label>Event Name<input value="${c.n || ''}" oninput="S.ct.n=this.value"></label><label>Category<select onchange="S.ct.c=this.value">${CATS.map(x => `<option ${c.c == x[1] ? 'selected' : ''}>${x[1]}</option>`).join('')}</select></label><label>Description<textarea rows="3" oninput="S.ct.ds=this.value">${c.ds || ''}</textarea></label><label>Event Banner<input type="file" accept="image/*"></label>`, () => `<div class="f2"><label>Start Date<input type="date" value="${c.d || ''}" onchange="S.ct.d=this.value"></label><label>End Date<input type="date"></label><label>Start Time<input type="time"></label><label>End Time<input type="time"></label><label>Mode<select><option>Offline</option><option>Online</option><option>Hybrid</option></select></label><label>City<input value="${c.l || ''}" oninput="S.ct.l=this.value"></label></div><label>Venue & Address<input></label>`, () => `<div class="f2"><label>Ticket Type<input value="Student Pass"></label><label>Price (₹)<input type="number" value="199" oninput="S.ct.p=this.value"></label><label>Maximum Quantity<input type="number" value="200" oninput="S.ct.q=this.value"></label><label>Speaker Name<input placeholder="Dr. Arun Kumar"></label><label>Designation<input></label><label>Session time<input type="time"></label></div>`, () => `<h3>Preview</h3><p><b>${c.n || 'Untitled event'}</b> · ${c.c || 'Technology'}<br>${c.l || 'City'} · ${c.d || 'Date not set'} · ${c.p ? '₹' + c.p : 'Free'}</p><p class="mu">${c.ds || 'No description yet.'}</p>`][c.s || 1]()}<div class="row"><button class="btn o" onclick="c_n(-1)" ${(c.s || 1) == 1 ? 'disabled' : ''}>Back</button>${(c.s || 1) < 4 ? `<button class="btn" onclick="c_n(1)">Next</button>` : `<span><button class="btn o" onclick="pub('Draft')">Save Draft</button> <button class="btn" onclick="pub('Pending Approval')">Publish Event</button></span>`}</div></div>`, pp: `<h2>Participants</h2><br><div class="row"><input id="pq" placeholder="Search participant" oninput="pt()"><select id="pf" onchange="pt()" style="max-width:160px"><option value="">All tickets</option><option>General</option><option>Student</option><option>VIP</option></select><button class="btn o" style="white-space:nowrap" onclick="navigator.clipboard?.writeText(PL.map(p=>[p.n,p.em,p.tk,p.id].join(',')).join('\\n'));T('CSV copied to clipboard')">Export CSV</button></div><br><div class="card tw" id="ptb">${ptb(PL)}</div>`, ck: `<h2>QR Check-in</h2><br><div class="card pad" style="text-align:center"><div class="scan" id="sq">${qr('SCAN')}</div><p class="mu">Point the camera at a ticket, or type a registration ID.</p><div class="row" style="max-width:420px;margin:auto"><input id="cid" placeholder="EH-26-10001"><button class="btn" onclick="chk($('#cid').value.trim())">Verify</button></div><br><button class="btn g" onclick="scn()">Simulate scan</button><div id="cr" style="margin-top:16px"></div></div>`, an: `<h2>Analytics</h2><div class="stats">${[['Total Registrations', '348'], ['Revenue', '₹47,242'], ['Conversion', '12.4%'], ['Attendance', '86%'], ['Cancellations', '3.1%']].map(s => `<div class="card pad stat"><b>${s[1]}</b>${s[0]}</div>`).join('')}</div><div class="two"><div class="card pad"><h3>Registrations this week</h3><div class="bars">${[['Mon', 42], ['Tue', 67], ['Wed', 103], ['Thu', 145], ['Fri', 189]].map(b => `<div style="height:${b[1] / 2}px"><i>${b[1]}</i></div>`).join('')}</div><div class="row mu"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div></div><div class="card pad"><h3>Participants by city</h3>${[['Coimbatore', 48], ['Chennai', 27], ['Madurai', 15], ['Other', 10]].map(b => `<div class="hb">${b[0]}<u style="width:${b[1] * 2}%"></u>${b[1]}%</div>`).join('')}<h3 style="margin-top:14px">Ticket sales</h3>${[['Student', 55], ['General', 35], ['VIP', 10]].map(b => `<div class="hb">${b[0]}<u style="width:${b[1] * 1.8}%"></u>${b[1]}%</div>`).join('')}</div></div>` }[S.ot]}</div></div>` },
+            a: () => { if (!S.u) return au(0); return `<div class="w dash"><div class="side"><button class="on">Dashboard</button><button>Users</button><button>Events</button><button>Payments</button><button>Reports</button></div><div><h2>Admin Dashboard</h2><div class="stats">${[['Total Users', '12,480'], ['Organizers', '214'], ['Total Events', E.length + 318], ['Registrations', '48,920'], ['Revenue', '₹38.4L']].map(s => `<div class="card pad stat"><b>${s[1]}</b>${s[0]}</div>`).join('')}</div><h3>Pending event approvals</h3><br>${PEND.length ? `<div class="card tw"><table><tr><th>Event</th><th>Organizer</th><th>Category</th><th>Date</th><th>Location</th><th>Submitted</th><th>Actions</th></tr>${PEND.map((p, i) => `<tr><td>${p.n}</td><td>${p.o}</td><td>${p.c}</td><td>${p.d}</td><td>${p.l}</td><td>${p.sub}</td><td><button class="btn g sm" onclick="apv(${i})">Approve</button> <button class="btn r sm" onclick="PEND.splice(${i},1);draw();T('Rejected')">Reject</button> <button class="btn o sm" onclick="T('Change request sent')">Request Changes</button></td></tr>`).join('')}</table></div>` : emp('✅', 'All caught up', 'No events waiting for review.')}<br><h3>Users</h3><br><div class="card tw"><table><tr><th>Name</th><th>Email</th><th>Role</th><th>Registrations</th><th>Status</th><th>Actions</th></tr>${USERS.map((u, i) => `<tr><td>${u[0]}</td><td>${u[1]}</td><td>${u[2]}</td><td>${u[3]}</td><td><span class="pill ${u[4] ? 'ok' : 'er'}">${u[4] ? 'Active' : 'Suspended'}</span></td><td><button class="btn o sm" onclick="USERS[${i}][4]=!USERS[${i}][4];draw()">${u[4] ? 'Suspend' : 'Activate'}</button></td></tr>`).join('')}</table></div></div></div>` }
+        };
+        const tp = (e, k) => k == 'VIP' ? e.p * 2 : k == 'Student' ? Math.round(e.p * .67) : e.p, pc = g => { const e = ev(g.e), p = tp(e, g.tk), f = Math.round(p * .03); return { p, f, t: p + f } }, bk = x => `<p class="row"><span>Ticket Price</span><span>₹${x.p}</span></p><p class="row"><span>Platform Fee</span><span>₹${x.f}</span></p><p class="row"><span>Discount</span><span>₹0</span></p><p class="row"><b>Total Amount</b><b>${x.t ? '₹' + x.t : 'Free'}</b></p>`;
+        const rw = r => { const e = ev(r.e); return `<div class="card pad row" style="margin-bottom:12px;flex-wrap:wrap"><div><h3>${e.t}</h3><p class="meta">📅 ${dt(e.d)} · 📍 ${e.l}<br><span class="pill ${r.st == 'Confirmed' ? 'ok' : 'er'}">${r.st}</span> ${r.tk} Pass · ${r.id}</p></div><div>${r.st == 'Confirmed' ? `<button class="btn sm" onclick="go('t','${r.id}')">View Ticket</button> <button class="btn r sm" onclick="canc('${r.id}')">Cancel</button> ` : ''}<button class="btn o sm" onclick="go('d',${e.id})">View Event</button></div></div>` };
+        function au(m) { return `<div class="w sec" style="max-width:440px"><div class="card pad"><h2>${m ? 'Create your account' : 'Welcome back'}</h2><br>${m ? fld('name', 'Full Name', 'text', { r: 1 }) : ''}${fld('email', 'Email', 'email', { r: 1 })}${m ? fld('mob', 'Mobile Number', 'tel') : ''}${fld('pw', 'Password', 'password', { r: 1 })}${m ? fld('pw2', 'Confirm Password', 'password', { r: 1 }) + '<label><input type="checkbox" id="tc"> I agree to the Terms and Privacy Policy.</label>' : ''}<label>Continue as (demo)<select id="role"><option>Participant</option><option>Organizer</option><option>Admin</option></select></label>${m ? '' : '<div class="row"><label style="margin:0"><input type="checkbox"> Remember me</label><a href="#" onclick="T(\'Reset link sent\');return false">Forgot Password</a></div><br>'}<button class="btn" style="width:100%" onclick="login(${m})">${m ? 'Create Account' : 'Login'}</button><br><br><button class="btn o" style="width:100%" onclick="login(${m},1)">Continue with Google</button><p class="mu" style="text-align:center">${m ? 'Already have an account? <a href="#" onclick="go(\'l\');return false">Login</a>' : 'Don\'t have an account? <a href="#" onclick="go(\'s\');return false">Sign Up</a>'}</p></div></div>` }
+        function er(k, m) { const x = $('#e_' + k); if (x) x.textContent = m; return !m }
+        function login(m, g) { const em = g ? 'demo@gmail.com' : $('#f_email').value.trim(); let ok = 1; if (!g) { ok &= er('email', /^\S+@\S+\.\S+$/.test(em) ? '' : 'Enter a valid email address.'); ok &= er('pw', $('#f_pw').value.length >= 8 ? '' : 'Use at least 8 characters.'); if (m) { ok &= er('name', $('#f_name').value.trim() ? '' : 'Enter your name.'); ok &= er('pw2', $('#f_pw2').value == $('#f_pw').value ? '' : 'Passwords do not match.'); if (!$('#tc').checked) { T('Please accept the Terms'); ok = 0 } } } if (!ok) return; S.u = { name: m && !g ? $('#f_name').value.trim() : em.split('@')[0].replace(/^./, c => c.toUpperCase()), email: em, role: $('#role').value }; T('Welcome, ' + S.u.name); S.rg && S.rg.back ? (S.rg.back = 0, go('r')) : dsh() }
+        function reg(id) { const e = ev(id); if (!e.s) return go('d', id); S.rg = { e: id, step: 1, tk: 'General', f: S.u ? { name: S.u.name, email: S.u.email } : {} }; go('r') }
+        function s1() { const g = S.rg, k = ['name', 'email', 'mob', 'org', 'dep', 'yr', 'city', 'skills']; k.forEach(x => g.f[x] = $('#f_' + x).value.trim()); let ok = 1; ok &= er('name', g.f.name ? '' : 'Full name is required.'); ok &= er('email', /^\S+@\S+\.\S+$/.test(g.f.email) ? '' : 'Enter a valid email.'); ok &= er('mob', /^[6-9]\d{9}$/.test(g.f.mob) ? '' : 'Enter a 10-digit mobile number.'); ok &= er('org', g.f.org ? '' : 'Required.'); if (ok && S.regs.some(r => r.e == g.e && r.st == 'Confirmed' && r.email == g.f.email)) { er('email', 'You are already registered for this event.'); ok = 0 } if (ok) { g.step = 2; draw() } }
+        function pay() { const g = S.rg, e = ev(g.e), b = $('#pay'); if (!e.s) { T('Event is full'); return } b.textContent = 'Processing…'; b.disabled = 1; setTimeout(() => { const x = pc(g); g.id = 'EH-26-' + (10000 + Math.floor(Math.random() * 89999)); S.regs.push({ id: g.id, e: g.e, name: g.f.name, email: g.f.email, tk: g.tk, total: x.t, st: 'Confirmed' }); e.s--; fetch('/api/events/' + g.e + '/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: g.f.name, email: g.f.email, mob: g.f.mob, org: g.f.org, tk: g.tk, payment: { method: 'UPI' } }) }).catch(() => { }); S.n.unshift({ t: `Your registration for ${e.t} is confirmed.`, r: 0 }); PL.push({ n: g.f.name, em: g.f.email, col: g.f.org, tk: g.tk, id: g.id, pay: 'Paid', dt: 'Today', ci: null }); g.fail = 0; g.step = 4; draw() }, 1000) }
+        function canc(id) { const r = S.regs.find(x => x.id == id); r.st = 'Cancelled'; ev(r.e).s++; draw(); T('Registration cancelled') }
+        const c_n = d => { S.ct.s = (S.ct.s || 1) + d; draw() };
+        function pub(st) { const c = S.ct; OE.unshift({ n: c.n || 'Untitled event', d: c.d ? dt(c.d) : 'TBD', r: 0, cap: +c.q || 200, rev: 0, st }); if (st != 'Draft') PEND.unshift({ n: c.n || 'Untitled event', o: S.u.name, c: c.c || 'Technology', d: c.d || 'TBD', l: c.l || '—', sub: 'Today' }); S.ct = {}; S.ot = 'ov'; draw(); T(st == 'Draft' ? 'Draft saved' : 'Submitted for approval') }
+        function apv(i) { const p = PEND.splice(i, 1)[0], n = E.length + 1; E.push({ id: n, t: p.n, c: p.c, tg: [p.c], l: p.l, v: p.l, d: p.d, tm: '10:00 AM – 4:00 PM', p: 149, s: 200, cap: 200, o: p.o, ty: 'Offline', e: '🎪', g: '#4338ca,#0ea5e9', m: 60, ds: 'Newly approved event on EventHub.' }); draw(); T('Approved. Event is now public.') }
+        const ptb = l => `<table><tr><th>Name</th><th>Email</th><th>College</th><th>Ticket</th><th>Registration ID</th><th>Payment</th><th>Registered</th><th>Check-in</th><th></th></tr>${l.map(p => `<tr><td>${p.n}</td><td>${p.em}</td><td>${p.col}</td><td>${p.tk}</td><td>${p.id}</td><td><span class="pill ${p.pay == 'Paid' ? 'ok' : 'wa'}">${p.pay}</span></td><td>${p.dt}</td><td>${p.ci ? '✓ ' + p.ci : '—'}</td><td><button class="btn o sm" onclick="chk('${p.id}',1)">Mark Check-in</button></td></tr>`).join('')}</table>`;
+        function pt() { const q = $('#pq').value.toLowerCase(), f = $('#pf').value; $('#ptb').innerHTML = ptb(PL.filter(p => (!f || p.tk == f) && (p.n + p.em + p.id).toLowerCase().includes(q))) }
+        function chk(id, fromTbl) { const p = PL.find(x => x.id == id), now = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }); let h; if (!p) h = `<div class="card pad er"><div class="big pop">✕</div><h3>Invalid Ticket</h3><p>No registration matches this QR code. Ask the guest for another ID.</p></div>`; else if (p.ci) h = `<div class="card pad wa"><div class="big">⚠️</div><h3>Already checked in</h3><p>${p.n} entered at ${p.ci}. Duplicate check-ins are blocked.</p></div>`; else { p.ci = now; h = `<div class="card pad ok"><div class="big pop">✓</div><h3>Valid Ticket · Check-in Successful</h3><p>${p.n} · ${p.id} · ${p.tk} Pass<br>AI & Data Science Summit 2026 · ${now}</p></div>` } if (fromTbl) { T(p.ci && !h.includes('Successful') ? 'Already checked in' : 'Checked in'); pt() } else $('#cr').innerHTML = h }
+        function scn() { $('#sq').classList.add('go'); $('#cr').innerHTML = '<p class="mu">Scanning…</p>'; setTimeout(() => { const p = PL.find(x => !x.ci); chk(p ? p.id : 'EH-BAD-000') }, 1200) }
+        const AI = () => `<div id="cp" class="${S.ao ? 'open' : ''}"><div class="row pad" style="background:var(--p2);color:#fff"><b>✨ EventHub AI</b><button class="btn sm" onclick="S.ao=0;draw()" aria-label="Close">✕</button></div><div id="cl">${(S.ch || [['a', 'Hi! Ask me about events, e.g. “Show me free workshops.”']]).map(m => `<div class="${m[0]}">${m[1]}</div>`).join('')}</div><div class="row pad"><input id="cq" placeholder="Ask about events…" onkeydown="if(event.key=='Enter')ask()"><button class="btn" onclick="ask()">Send</button></div></div><button class="btn fab" onclick="S.ao=!S.ao;draw()">✨ Ask EventHub AI</button>`;
+        function ask() { const q = $('#cq').value.trim(); if (!q) return; const t = q.toLowerCase(); let r, w; const cy = t.match(/coimbatore|chennai|madurai/); if (/free/.test(t)) { r = E.filter(e => !e.p) } else if (cy) r = E.filter(e => e.l.toLowerCase() == cy[0]); else if (/weekend/.test(t)) r = E.filter(e => [0, 6].includes(new Date(e.d).getDay())); else if (/final|student|career/.test(t)) r = E.filter(e => e.tg.some(x => /Hackathons|Career/.test(x))); else if (/\bai\b|data|machine|ml/.test(t)) r = E.filter(e => e.tg.includes('AI & Data Science')); else r = [...E].sort((a, b) => b.m - a.m).slice(0, 3); r = [...r].sort((a, b) => b.m - a.m); S.ch = (S.ch || [['a', 'Hi! Ask me about events, e.g. “Show me free workshops.”']]).concat([['u', q], ['a', r.length ? `I found ${r.length} event${r.length > 1 ? 's' : ''}:<br>` + r.map((e, i) => `${i + 1}. <a href="#" onclick="go('d',${e.id});return false">${e.t}</a> — ${e.m}% match`).join('<br>') : 'No events match that yet. Try “free workshops” or a city name.']]); S.ao = 1; draw(); $('#cl').scrollTop = 9e9 }
+        draw();
+        fetch('/api/events').then(r => r.json()).then(d => { if (d.length) { E.length = 0; d.forEach(x => E.push(x)); draw() } }).catch(() => { });
+    </script>
+</body>
+
+</html>
