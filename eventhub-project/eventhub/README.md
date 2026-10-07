@@ -1,5 +1,15 @@
 # EventHub (Flask + SQLite)
 
+outputs:
+<img width="1918" height="966" alt="image" src="https://github.com/user-attachments/assets/2db3709f-bdb6-4014-a2a3-13d351078443" />
+
+<img width="1919" height="963" alt="image" src="https://github.com/user-attachments/assets/39c3490a-7808-4a85-bef0-263d7caf0c6d" />
+
+<img width="1919" height="961" alt="image" src="https://github.com/user-attachments/assets/41a5e054-5674-437e-bf20-5919bf412317" />
+
+
+
+
     pip install -r requirements.txt
     python app.py          # open http://localhost:5000
 
